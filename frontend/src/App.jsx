@@ -69,16 +69,27 @@ function AuditScreen({ language, onBack }) {
     }
   };
 
-  const handleCopy = () => {
-    const regex = new RegExp('```' + language.id + '([\\s\\S]*?)```');
-    const codeMatch = review.match(regex);
-    const textToCopy = codeMatch ? codeMatch[1].trim() : "";
-    if (textToCopy) {
-      navigator.clipboard.writeText(textToCopy);
-      setCopyStatus('Copied!');
-      setTimeout(() => setCopyStatus('Copy Code'), 2000);
-    }
-  };
+ const handleCopy = async () => {
+  try {
+    // Match ANY code block, not just language-specific
+    const codeMatch = review.match(/```[\w]*\n([\s\S]*?)```/);
+
+    const textToCopy = codeMatch
+      ? codeMatch[1].trim()
+      : review; // fallback: copy full review
+
+    if (!textToCopy) return;
+
+    await navigator.clipboard.writeText(textToCopy);
+
+    setCopyStatus('Copied!');
+    setTimeout(() => setCopyStatus('Copy Code'), 2000);
+  } catch (err) {
+    console.error("Copy failed:", err);
+    setCopyStatus('Failed ❌');
+    setTimeout(() => setCopyStatus('Copy Code'), 2000);
+  }
+};
 
   const scoreMatch = review.match(/Score: (\d+)\/10/);
   const score = scoreMatch ? parseInt(scoreMatch[1]) : null;
