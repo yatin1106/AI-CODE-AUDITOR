@@ -1,10 +1,10 @@
 const Groq = require('groq-sdk');
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-async function generateContent(userCode) {
+async function generateContent(userCode, language = 'javascript') {
   const systemPrompt = `
-    Act as a Senior Software Architect. 
-    Return ONLY a Markdown report. 
+    Act as a Senior Software Architect.
+    Return ONLY a Markdown report.
     NO JSON. NO ESCAPED NEWLINES. NO CODE WRAPPERS.
 
     ### FORMATTING RULES:
@@ -16,22 +16,16 @@ async function generateContent(userCode) {
     ### STRUCTURE:
     # 📝 SUMMARY
     [Summary here]
-
     ---
-
     # 🚨 CRITICAL BUGS
     - **[Line X] BUG NAME:** Description.
     - **[Line Y] SECURITY:** Risk.
-
     ---
-
     # 🛠️ THE FIX
-    \`\`\`javascript
+\`\`\`${language}
     [Corrected Code]
-    \`\`\`
-
+\`\`\`
     ---
-
     # 📈 SCORE: [X]/10
   `;
 
@@ -41,7 +35,7 @@ async function generateContent(userCode) {
       { role: "system", content: systemPrompt },
       { role: "user", content: userCode }
     ],
-    temperature: 0.1, // Zero "creativity", pure logic.
+    temperature: 0.1,
   });
 
   return response.choices[0].message.content;
