@@ -49,7 +49,7 @@ function AuditScreen({ language, onBack }) {
     setLoading(true);
     setReview('Analyzing code...');
     try {
-      const response = await fetch('http://localhost:3000/api/ai/generate', {
+      const response = await fetch('https://ai-code-auditor-0oop.onrender.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language: language.id })
