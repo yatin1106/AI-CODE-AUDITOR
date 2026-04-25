@@ -19,6 +19,12 @@ const LANGUAGES = [
   { id: 'ruby',       label: 'Ruby',       icon: 'RB' },
 ];
 
+const EXT_MAP = {
+  cpp: 'cpp', python: 'py', java: 'java', typescript: 'ts',
+  c: 'c', go: 'go', rust: 'rs', kotlin: 'kt',
+  swift: 'swift', php: 'php', ruby: 'rb', javascript: 'js'
+};
+
 function LanguageScreen({ onSelect }) {
   return (
     <div className="lang-screen">
@@ -49,7 +55,7 @@ function AuditScreen({ language, onBack }) {
     setLoading(true);
     setReview('Analyzing code...');
     try {
-      const response = await fetch('https://ai-code-auditor-0oop.onrender.com', {
+      const response = await fetch('https://ai-code-auditor-0oop.onrender.com/api/ai/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language: language.id })
@@ -98,7 +104,7 @@ function AuditScreen({ language, onBack }) {
             <span className="terminal-dot red"></span>
             <span className="terminal-dot yellow"></span>
             <span className="terminal-dot green"></span>
-            <span className="terminal-title">main.{language.id === 'cpp' ? 'cpp' : language.id === 'python' ? 'py' : language.id === 'java' ? 'java' : language.id === 'typescript' ? 'ts' : language.id === 'c' ? 'c' : language.id === 'go' ? 'go' : language.id === 'rust' ? 'rs' : language.id === 'kotlin' ? 'kt' : language.id === 'swift' ? 'swift' : language.id === 'php' ? 'php' : language.id === 'ruby' ? 'rb' : 'js'}</span>
+            <span className="terminal-title">main.{EXT_MAP[language.id] || 'js'}</span>
           </div>
           <textarea
             className="editor"
