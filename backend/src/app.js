@@ -5,7 +5,9 @@ const app = express();
 
 // 2. Enable CORS for all origins
 // This allows your frontend (on port 5173, 3001, etc.) to talk to this server
-app.use(cors()); 
+app.use(cors({
+  origin: 'https://ai-code-auditor-green.vercel.app'
+}));
 
 app.use(express.json()); 
 
