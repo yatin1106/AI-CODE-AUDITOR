@@ -1,0 +1,293 @@
+:root {
+  --bg-dark: #080a0c;
+  --panel-bg: #111418;
+  --panel-border: #2d333b;
+  --accent-cyan: #00ffff;
+  --text-main: #e6edf3;
+  --text-dim: #8b949e;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body, html, #root {
+  margin: 0; padding: 0;
+  height: 100vh; width: 100vw;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+/* --- LANGUAGE SELECTION SCREEN --- */
+.lang-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 40px;
+  padding: 40px;
+}
+
+.lang-header {
+  text-align: center;
+}
+
+.lang-header h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 0 0 10px 0;
+  color: var(--accent-cyan);
+}
+
+.lang-subtitle {
+  color: var(--text-dim);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+}
+
+.lang-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 28px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: var(--text-main);
+}
+
+.lang-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.lang-icon {
+  font-size: 1.3rem;
+  font-weight: 900;
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-cyan);
+}
+
+.lang-label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+/* --- AUDIT SCREEN --- */
+.audit-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 75px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--panel-border);
+  flex-shrink: 0;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-nav h1 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.lang-badge {
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--panel-border);
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.nav-actions { display: flex; gap: 12px; }
+
+.run-btn {
+  background: var(--accent-cyan);
+  color: #000; border: none;
+  padding: 10px 25px; border-radius: 8px;
+  font-weight: 800; cursor: pointer; transition: 0.2s;
+}
+
+.run-btn:hover { box-shadow: 0 0 15px rgba(0,255,255,0.4); }
+
+/* --- WORKSPACE --- */
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1; gap: 20px; padding: 20px;
+  overflow: hidden; min-height: 0;
+}
+
+/* --- TERMINAL EDITOR --- */
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #1a1f27;
+  border-bottom: 1px solid var(--panel-border);
+  flex-shrink: 0;
+}
+
+.terminal-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red    { background: #ff5f57; }
+.terminal-dot.yellow { background: #febc2e; }
+.terminal-dot.green  { background: #28c840; }
+
+.terminal-title {
+  margin-left: 8px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-family: 'Fira Code', monospace;
+}
+
+.editor {
+  width: 100%; flex: 1;
+  background: #010409;
+  color: var(--text-main);
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 0.95rem;
+  padding: 20px; resize: none; outline: none; line-height: 1.6;
+  border: none;
+}
+
+/* --- RESULTS PANE --- */
+.results-pane {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 40px;
+  overflow-y: auto; overflow-x: hidden;
+  position: relative; text-align: left; min-height: 0;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.empty-icon { font-size: 2.5rem; }
+
+.pane-controls {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 30px;
+}
+
+.copy-btn {
+  background: #21262d; color: var(--accent-cyan);
+  border: 1px solid var(--panel-border);
+  padding: 6px 15px; border-radius: 6px;
+  font-size: 0.8rem; cursor: pointer;
+}
+
+/* --- MARKDOWN --- */
+.markdown-content {
+  display: flex; flex-direction: column;
+  gap: 15px; max-width: 100%; overflow: hidden;
+}
+
+.markdown-content h1 {
+  font-size: 1.8rem; margin-top: 0;
+  border-bottom: 1px solid var(--panel-border);
+  padding-bottom: 10px;
+}
+
+.markdown-content h2 { font-size: 1.4rem; color: #ff4444; margin-top: 30px; }
+
+.markdown-content p,
+.markdown-content li {
+  font-size: 1.05rem; line-height: 1.7;
+  color: #d1d5db; word-break: break-word;
+}
+
+.markdown-content pre {
+  overflow-x: auto; max-width: 100%;
+  margin: 0; padding: 0; background: transparent;
+}
+
+.markdown-content p code,
+.markdown-content li code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  background: #1e2228; padding: 2px 6px;
+  border-radius: 4px; font-size: 0.9em;
+}
+
+/* --- BADGES --- */
+.badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 800; }
+.badge.danger  { background: rgba(255,68,68,0.15);  color: #ff4444;  border: 1px solid #ff4444; }
+.badge.warning { background: rgba(255,170,0,0.15);  color: #ffaa00;  border: 1px solid #ffaa00; }
+.badge.success { background: rgba(0,255,255,0.15);  color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
